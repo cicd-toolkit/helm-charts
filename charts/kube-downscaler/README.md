@@ -1,6 +1,6 @@
 # kube-downscaler
 
-![Version: 0.7.3](https://img.shields.io/badge/Version-0.7.3-informational?style=flat-square) ![AppVersion: 23.2.0](https://img.shields.io/badge/AppVersion-23.2.0-informational?style=flat-square)
+![Version: 0.7.4](https://img.shields.io/badge/Version-0.7.4-informational?style=flat-square) ![AppVersion: 23.2.0](https://img.shields.io/badge/AppVersion-23.2.0-informational?style=flat-square)
 
 Scale down Kubernetes deployments after work hours
 
@@ -11,36 +11,36 @@ Scale down Kubernetes deployments after work hours
 Add my public chart repo:
 
 ```console
-helm repo add giuliocalzolari https://giuliocalzolari.github.io/helm-charts
+helm repo add cicd-toolkit https://cicd-toolkit.github.io/helm-charts
 ```
 
 A simple install with default values:
 
 ```console
-helm install giuliocalzolari/kube-downscaler
+helm install cicd-toolkit/kube-downscaler
 ```
 
 To install the chart with the release name `my-release`:
 
 ```console
-helm install my-release giuliocalzolari/kube-downscaler
+helm install my-release cicd-toolkit/kube-downscaler
 ```
 
 To install with some set values:
 
 ```console
-helm install my-release giuliocalzolari/kube-downscaler --set values_key1=value1 --set values_key2=value2
+helm install my-release cicd-toolkit/kube-downscaler --set values_key1=value1 --set values_key2=value2
 ```
 
 To install with custom values file:
 
 ```console
-helm install my-release giuliocalzolari/kube-downscaler -f values.yaml
+helm install my-release cicd-toolkit/kube-downscaler -f values.yaml
 ```
 
 ## Source Code
 
-* <https://github.com/giuliocalzolari/helm-charts>
+* <https://github.com/cicd-toolkit/helm-charts>
 * <https://codeberg.org/hjacobs/kube-downscaler>
 
 ## Values
