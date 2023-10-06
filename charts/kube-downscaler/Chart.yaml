@@ -7,7 +7,7 @@ keywords:
 - k8s pods scheduler
 - scheduled lifecycle
 sources:
-- https://github.com/giuliocalzolari/helm-charts
+- https://github.com/cicd-toolkit/helm-charts
 - https://codeberg.org/hjacobs/kube-downscaler
 home: https://codeberg.org/hjacobs/kube-downscaler
 maintainers:

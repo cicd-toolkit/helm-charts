@@ -7,31 +7,31 @@
 Add my public chart repo:
 
 ```console
-helm repo add giuliocalzolari https://giuliocalzolari.github.io/helm-charts
+helm repo add cicd-toolkit https://cicd-toolkit.github.io/helm-charts
 ```
 
 A simple install with default values:
 
 ```console
-helm install giuliocalzolari/cluster_issuer
+helm install cicd-toolkit/cluster_issuer
 ```
 
 To install the chart with the release name `my-release`:
 
 ```console
-helm install my-release giuliocalzolari/cluster_issuer
+helm install my-release cicd-toolkit/cluster_issuer
 ```
 
 To install with some set values:
 
 ```console
-helm install my-release giuliocalzolari/cluster_issuer --set values_key1=value1 --set values_key2=value2
+helm install my-release cicd-toolkit/cluster_issuer --set values_key1=value1 --set values_key2=value2
 ```
 
 To install with custom values file:
 
 ```console
-helm install my-release giuliocalzolari/cluster_issuer -f values.yaml
+helm install my-release cicd-toolkit/cluster_issuer -f values.yaml
 ```
 
 ## Values

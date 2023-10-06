@@ -7,31 +7,31 @@
 Add my public chart repo:
 
 ```console
-helm repo add giuliocalzolari https://giuliocalzolari.github.io/helm-charts
+helm repo add cicd-toolkit https://cicd-toolkit.github.io/helm-charts
 ```
 
 A simple install with default values:
 
 ```console
-helm install giuliocalzolari/efk
+helm install cicd-toolkit/efk
 ```
 
 To install the chart with the release name `my-release`:
 
 ```console
-helm install my-release giuliocalzolari/efk
+helm install my-release cicd-toolkit/efk
 ```
 
 To install with some set values:
 
 ```console
-helm install my-release giuliocalzolari/efk --set values_key1=value1 --set values_key2=value2
+helm install my-release cicd-toolkit/efk --set values_key1=value1 --set values_key2=value2
 ```
 
 To install with custom values file:
 
 ```console
-helm install my-release giuliocalzolari/efk -f values.yaml
+helm install my-release cicd-toolkit/efk -f values.yaml
 ```
 
 ## Values
