@@ -1,0 +1,53 @@
+apiVersion: v1
+entries:
+  cluster_issuer:
+  - apiVersion: v2
+    created: "2023-10-06T06:29:30.688051365Z"
+    digest: c3050c215b41891af7b1e398a2ca3a4a6c7628d28338d2ee73d545fc7a257b12
+    maintainers:
+    - name: giuliocalzolari
+    name: cluster_issuer
+    urls:
+    - https://github.com/cicd-toolkit/helm-charts/releases/download/cluster_issuer-0.0.3/cluster_issuer-0.0.3.tgz
+    version: 0.0.3
+  efk:
+  - apiVersion: v2
+    created: "2023-10-06T06:29:30.788995315Z"
+    digest: f480798bcca35f18bfbf97f229212a89e3e260e4db6ec4e52fa0a3f9c78ee2d8
+    maintainers:
+    - name: giuliocalzolari
+    name: efk
+    urls:
+    - https://github.com/cicd-toolkit/helm-charts/releases/download/efk-0.0.19/efk-0.0.19.tgz
+    version: 0.0.19
+  generic:
+  - apiVersion: v2
+    created: "2023-10-06T06:29:30.904564102Z"
+    digest: 3552f68c615c76eaf3d53efd96022ac15469a5f19fe0cecfc2bbbff379b89722
+    maintainers:
+    - name: giuliocalzolari
+    name: generic
+    urls:
+    - https://github.com/cicd-toolkit/helm-charts/releases/download/generic-0.0.2/generic-0.0.2.tgz
+    version: 0.0.2
+  kube-downscaler:
+  - apiVersion: v1
+    appVersion: 23.2.0
+    created: "2023-10-06T06:29:31.007280668Z"
+    description: Scale down Kubernetes deployments after work hours
+    digest: 493f37c24249ee57980651d975ec99e2e555ebc5911af68287f2d1379da2680d
+    home: https://codeberg.org/hjacobs/kube-downscaler
+    keywords:
+    - k8s pods scheduler
+    - scheduled lifecycle
+    maintainers:
+    - name: hjacobs
+      url: https://codeberg.org/hjacobs
+    name: kube-downscaler
+    sources:
+    - https://github.com/cicd-toolkit/helm-charts
+    - https://codeberg.org/hjacobs/kube-downscaler
+    urls:
+    - https://github.com/cicd-toolkit/helm-charts/releases/download/kube-downscaler-0.7.4/kube-downscaler-0.7.4.tgz
+    version: 0.7.4
+generated: "2023-10-06T06:29:31.007286968Z"
