@@ -10,6 +10,15 @@ entries:
     urls:
     - https://github.com/cicd-toolkit/helm-charts/releases/download/cluster_issuer-0.0.3/cluster_issuer-0.0.3.tgz
     version: 0.0.3
+  - apiVersion: v2
+    created: "2023-09-15T07:41:23.10435691Z"
+    digest: 6f354b79fdcbcdc867de491c4e17fdf13c8bb6823bdcb7115fff1d347692b359
+    maintainers:
+    - name: giuliocalzolari
+    name: cluster_issuer
+    urls:
+    - https://github.com/giuliocalzolari/helm-charts/releases/download/cluster_issuer-0.0.2/cluster_issuer-0.0.2.tgz
+    version: 0.0.2    
   efk:
   - apiVersion: v2
     created: "2023-10-06T06:29:30.788995315Z"
@@ -20,6 +29,15 @@ entries:
     urls:
     - https://github.com/cicd-toolkit/helm-charts/releases/download/efk-0.0.19/efk-0.0.19.tgz
     version: 0.0.19
+  - apiVersion: v2
+    created: "2023-10-04T07:17:00.35814205Z"
+    digest: 55344218d1b5a97339d3d42c30844c27d57d75485f93f832060fb5e012b1f6ff
+    maintainers:
+    - name: giuliocalzolari
+    name: efk
+    urls:
+    - https://github.com/giuliocalzolari/helm-charts/releases/download/efk-0.0.18/efk-0.0.18.tgz
+    version: 0.0.18    
   generic:
   - apiVersion: v2
     created: "2023-10-06T06:29:30.904564102Z"
