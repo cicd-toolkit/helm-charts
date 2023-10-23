@@ -52,6 +52,7 @@ spec:
             value: >
               [
               "/var/log/containers/fluent*",
+              "/var/log/containers/es-cluster-*",
               "/var/log/containers/kube-proxy*",
               "/var/log/containers/konnectivity-agent*",
               "/var/log/containers/efs-csi-node-*",
