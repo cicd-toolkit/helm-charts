@@ -132,7 +132,7 @@ data:
         Path              /var/log/containers/*.log
         Parser            docker
         DB                /var/log/flb_kube.db
-        Mem_Buf_Limit     5MB
+        Mem_Buf_Limit     512MB
         Skip_Long_Lines   On
         Refresh_Interval  10
   filter-kubernetes.conf: |
@@ -158,7 +158,7 @@ data:
         TLS             On
         Logstash_Format On
         Replace_Dots    On
-        Retry_Limit     False
+        Retry_Limit     5
   parsers.conf: |
     [PARSER]
         Name   apache
