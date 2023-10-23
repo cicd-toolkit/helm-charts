@@ -18,8 +18,17 @@ entries:
     name: cluster_issuer
     urls:
     - https://github.com/giuliocalzolari/helm-charts/releases/download/cluster_issuer-0.0.2/cluster_issuer-0.0.2.tgz
-    version: 0.0.2    
+    version: 0.0.2
   efk:
+  - apiVersion: v2
+    created: "2023-10-23T07:19:46.411478478Z"
+    digest: 14cb63624abfe7561ea62eb5dc10f5e59fbf322486cf63cf77a6e468463c3dfe
+    maintainers:
+    - name: giuliocalzolari
+    name: efk
+    urls:
+    - https://github.com/cicd-toolkit/helm-charts/releases/download/efk-0.0.20/efk-0.0.20.tgz
+    version: 0.0.20
   - apiVersion: v2
     created: "2023-10-06T06:29:30.788995315Z"
     digest: f480798bcca35f18bfbf97f229212a89e3e260e4db6ec4e52fa0a3f9c78ee2d8
@@ -37,7 +46,7 @@ entries:
     name: efk
     urls:
     - https://github.com/giuliocalzolari/helm-charts/releases/download/efk-0.0.18/efk-0.0.18.tgz
-    version: 0.0.18    
+    version: 0.0.18
   generic:
   - apiVersion: v2
     created: "2023-10-06T06:29:30.904564102Z"
@@ -68,4 +77,4 @@ entries:
     urls:
     - https://github.com/cicd-toolkit/helm-charts/releases/download/kube-downscaler-0.7.4/kube-downscaler-0.7.4.tgz
     version: 0.7.4
-generated: "2023-10-06T06:29:31.007286968Z"
+generated: "2023-10-23T07:19:46.412083567Z"
