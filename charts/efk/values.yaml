@@ -1,7 +1,16 @@
 elasticsearch:
   replicas: 1
   image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
-  es_java_opt: -Xms512m -Xmx512m
+  es_java_opt: -Xmx1g -Xms1g
+  sysctlVmMaxMapCount: "262144"
+  clusterHealthCheckParams: "wait_for_status=green&timeout=1s"
+  resources:
+    requests:
+      cpu: "1000m"
+      memory: "2Gi"
+    limits:
+      cpu: "1000m"
+      memory: "2Gi"
   persistence:
     storageClassName:
     storageSize: 100Gi

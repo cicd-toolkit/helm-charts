@@ -1,7 +1,5 @@
-{{ $seed_hosts := list }}
 {{ $hosts := list }}
 {{ range $i := until (.Values.elasticsearch.replicas | int) }}
-{{ $seed_hosts = append $seed_hosts (printf "es-cluster-%d.%s" $i $.Release.Namespace) }}
 {{ $hosts = append $hosts (printf "es-cluster-%d" $i) }}
 {{ end }}
 
@@ -54,11 +52,7 @@ spec:
       containers:
       - name: elasticsearch
         image: {{ .Values.elasticsearch.image }}
-        resources:
-            limits:
-              cpu: 1000m
-            requests:
-              cpu: 500m
+        resources: {{ toYaml .Values.elasticsearch.resources | nindent 10 }}
         ports:
         - containerPort: 9200
           name: rest
@@ -80,7 +74,7 @@ spec:
               fieldRef:
                 fieldPath: metadata.name
           - name: discovery.seed_hosts
-            value: {{ join "," $seed_hosts }}
+            value: logs-elasticsearch
           - name: cluster.initial_master_nodes
             value: {{ join "," $hosts }}
           - name: ES_JAVA_OPTS
@@ -112,6 +106,7 @@ spec:
               secretKeyRef:
                 name: kibana-password
                 key: password
+
       initContainers:
       # - name: fix-permissions
       #   image: busybox
@@ -123,7 +118,7 @@ spec:
       #     mountPath: /usr/share/elasticsearch/data
       - name: increase-vm-max-map
         image: busybox
-        command: ["sysctl", "-w", "vm.max_map_count=262144"]
+        command: ["sysctl", "-w", "vm.max_map_count={{ .Values.elasticsearch.sysctlVmMaxMapCount }}"]
         securityContext:
           privileged: true
           runAsUser: 0
@@ -169,3 +164,4 @@ spec:
       name: rest
     - port: 9300
       name: inter-node
+
