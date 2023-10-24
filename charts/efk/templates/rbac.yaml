@@ -6,20 +6,15 @@ metadata:
   labels:
     app: logreader
     app.kubernetes.io/name: logreader
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/version: {{ .Chart.Version }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- include "efk.labels" . | nindent 4 }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: logreader
   labels:
-    app: logreader
     app.kubernetes.io/name: logreader
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/version: {{ .Chart.Version }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- include "efk.labels" . | nindent 4 }}
 rules:
 - apiGroups:
   - ""
@@ -36,6 +31,9 @@ kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: logreader
+  labels:
+    app.kubernetes.io/name: logreader
+    {{- include "efk.labels" . | nindent 4 }}
 roleRef:
   kind: ClusterRole
   name: logreader
