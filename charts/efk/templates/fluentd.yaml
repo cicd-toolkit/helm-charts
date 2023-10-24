@@ -1,3 +1,4 @@
+{{- if .Values.fluentd.enabled }}
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -23,8 +24,8 @@ spec:
         app.kubernetes.io/version: {{ .Chart.Version }}
         app.kubernetes.io/managed-by: {{ .Release.Service }}
     spec:
-      serviceAccount: fluentd
-      serviceAccountName: fluentd
+      serviceAccount: logreader
+      serviceAccountName: logreader
       containers:
       - name: fluentd
         image: {{ .Values.fluentd.image }}
@@ -68,7 +69,7 @@ spec:
               "/var/log/containers/cloud-node-manager-*",
               "/var/log/kube-proxy.log"
               ]
-            
+
           - name: FLUENT_CONTAINER_TAIL_PARSER_TYPE
             value: /^(?<time>.+) (?<stream>stdout|stderr)( (?<logtag>.))? (?<log>.*)$/
         resources:
@@ -199,3 +200,4 @@ data:
         Regex       ^\<(?<pri>[0-9]+)\>(?<time>[^ ]* {1,2}[^ ]* [^ ]*) (?<host>[^ ]*) (?<ident>[a-zA-Z0-9_\/\.\-]*)(?:\[(?<pid>[0-9]+)\])?(?:[^\:]*\:)? *(?<message>.*)$
         Time_Key    time
         Time_Format %b %d %H:%M:%S
+{{- end  }}

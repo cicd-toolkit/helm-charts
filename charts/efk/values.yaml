@@ -1,6 +1,6 @@
 elasticsearch:
   replicas: 1
-  image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
+  image: docker.elastic.co/elasticsearch/elasticsearch:7.17.14
   es_java_opt: -Xmx1g -Xms1g
   sysctlVmMaxMapCount: "262144"
   clusterHealthCheckParams: "wait_for_status=green&timeout=1s"
@@ -17,7 +17,7 @@ elasticsearch:
 
 kibana:
   replicas: 1
-  image: docker.elastic.co/kibana/kibana:7.5.0
+  image: docker.elastic.co/kibana/kibana:7.17.14
   password: elastic
   init_index_pattern: false
   ingress:
@@ -29,7 +29,55 @@ kibana:
       issuer: letsencrypt-prod
 
 fluentd:
-  image: fluent/fluentd-kubernetes-daemonset:v1.15-debian-elasticsearch7-1
+  image: fluent/fluentd-kubernetes-daemonset:v1.16-debian-elasticsearch7-1
+  enabled: false
+
+filebeat:
+  image: docker.elastic.co/beats/filebeat:7.17.14
+  enabled: true
+  updateStrategy: RollingUpdate
+  config:
+    filebeat.yml: |
+      filebeat.inputs:
+      - type: container
+        paths:
+          - /var/log/containers/*.log
+        exclude_files:
+          - /var/log/containers/fluent.*
+          - /var/log/containers/es-cluster-.*
+          - /var/log/containers/kube-proxy.*
+          - /var/log/containers/konnectivity-agent.*
+          - /var/log/containers/efs-csi-node-.*
+          - /var/log/containers/ebs-snapshot-controller-.*
+          - /var/log/containers/gke-.*
+          - /var/log/containers/event-exporter-gke-.*
+          - /var/log/containers/calico-.*
+          - /var/log/containers/kube-dns-.*
+          - /var/log/containers/netd-.*
+          - /var/log/containers/pdcsi-node-.*
+          - /var/log/containers/csi-azuredisk-node-.*
+          - /var/log/containers/cloud-node-manager-.*
+        processors:
+        - add_kubernetes_metadata:
+            host: ${NODE_NAME}
+            matchers:
+            - logs_path:
+                logs_path: "/var/log/containers/"
+      output.elasticsearch:
+        host: '${NODE_NAME}'
+        protocol: https
+
+        hosts: ['${ELASTICSEARCH_HOST:logs-elasticsearch}:${ELASTICSEARCH_PORT:9200}']
+        username: "${ELASTICSEARCH_USERNAME:elastic}"
+        password: "${ELASTICSEARCH_PASSWORD}"
+        ssl:
+          verification_mode: certificate
+          certificate_authorities:
+          - /usr/share/filebeat/config/certs/ca.crt
+          - /usr/share/filebeat/config/certs/tls.crt
+
+
+
 
 curator:
   schedule: "0 1 * * *"
