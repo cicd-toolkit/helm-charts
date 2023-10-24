@@ -57,6 +57,12 @@ filebeat:
           - /var/log/containers/pdcsi-node-.*
           - /var/log/containers/csi-azuredisk-node-.*
           - /var/log/containers/cloud-node-manager-.*
+        processors:
+        - add_kubernetes_metadata:
+            host: ${NODE_NAME}
+            matchers:
+            - logs_path:
+                logs_path: "/var/log/containers/"
       output.elasticsearch:
         protocol: https
         hosts: ['${ELASTICSEARCH_HOST:logs-elasticsearch}:${ELASTICSEARCH_PORT:9200}']

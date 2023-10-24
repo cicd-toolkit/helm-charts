@@ -83,7 +83,7 @@ if [ -z "${umbrella}" ]; then
     usage
 fi
 
-if [ ! -d "$umbrella" ]; then
+if [ ! -d "charts/$umbrella" ]; then
    echo "Warning: chart '$umbrella' NOT found."
    exit 1
 fi
