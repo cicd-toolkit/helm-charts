@@ -105,7 +105,7 @@ echo " timeout: ${timeout}"
 echo " wait: ${wait}"
 echo ""
 
-cd $umbrella
+cd charts/$umbrella
 case "$action" in
   "del")
     helm_delete $release $namespace
