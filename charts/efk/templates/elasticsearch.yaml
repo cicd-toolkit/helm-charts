@@ -21,9 +21,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: elasticsearch
-        app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/version: {{ .Chart.Version }}
-        app.kubernetes.io/managed-by: {{ .Release.Service }}
+        {{- include "efk.labels" . | nindent 8 }}
     spec:
       securityContext:
         runAsUser: 1000
@@ -136,7 +134,9 @@ spec:
   - metadata:
       name: data-logging
       labels:
-        app: elasticsearch
+        app.kubernetes.io/name: elasticsearch
+        app.kubernetes.io/instance: {{ .Release.Name }}
+
     spec:
         accessModes: [ "ReadWriteOnce" ]
         {{- with .Values.elasticsearch.persistence.storageClassName }}

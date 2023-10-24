@@ -5,7 +5,6 @@ kind: ConfigMap
 metadata:
   name: filebeat-config
   labels:
-    app: filebeat
     app.kubernetes.io/name: filebeat
     {{- include "efk.labels" . | nindent 4 }}
 data:

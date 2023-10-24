@@ -5,22 +5,19 @@ kind: DaemonSet
 metadata:
   name: fluentd
   labels:
-    app: fluentd
     app.kubernetes.io/name: fluentd
     {{- include "efk.labels" . | nindent 4 }}
     kubernetes.io/cluster-service: "true"
 spec:
   selector:
     matchLabels:
-      app: fluentd
+      app.kubernetes.io/name: fluentd
+      app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: fluentd
         app.kubernetes.io/name: fluentd
-        app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/version: {{ .Chart.Version }}
-        app.kubernetes.io/managed-by: {{ .Release.Service }}
+        {{- include "efk.labels" . | nindent 8 }}
     spec:
       serviceAccount: logreader
       serviceAccountName: logreader
