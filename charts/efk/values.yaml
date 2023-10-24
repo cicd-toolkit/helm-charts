@@ -66,12 +66,11 @@ filebeat:
       output.elasticsearch:
         host: '${NODE_NAME}'
         protocol: https
-
         hosts: ['${ELASTICSEARCH_HOST:logs-elasticsearch}:${ELASTICSEARCH_PORT:9200}']
         username: "${ELASTICSEARCH_USERNAME:elastic}"
         password: "${ELASTICSEARCH_PASSWORD}"
         ssl:
-          verification_mode: certificate
+          verification_mode: none
           certificate_authorities:
           - /usr/share/filebeat/config/certs/ca.crt
           - /usr/share/filebeat/config/certs/tls.crt
