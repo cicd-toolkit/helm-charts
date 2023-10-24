@@ -1,6 +1,6 @@
 # efk
 
-![Version: 0.0.22](https://img.shields.io/badge/Version-0.0.22-informational?style=flat-square)
+![Version: 0.0.24](https://img.shields.io/badge/Version-0.0.24-informational?style=flat-square)
 
 ## How to install this chart
 
@@ -43,13 +43,24 @@ helm install my-release cicd-toolkit/efk -f values.yaml
 | curator.timestring | string | `"%Y.%m.%d"` |  |
 | curator.unit | string | `"days"` |  |
 | curator.unit_count | int | `15` |  |
-| elasticsearch.es_java_opt | string | `"-Xms512m -Xmx512m"` |  |
-| elasticsearch.image | string | `"docker.elastic.co/elasticsearch/elasticsearch:7.5.0"` |  |
+| elasticsearch.clusterHealthCheckParams | string | `"wait_for_status=green&timeout=1s"` |  |
+| elasticsearch.es_java_opt | string | `"-Xmx1g -Xms1g"` |  |
+| elasticsearch.image | string | `"docker.elastic.co/elasticsearch/elasticsearch:7.17.14"` |  |
 | elasticsearch.persistence.storageClassName | string | `nil` |  |
 | elasticsearch.persistence.storageSize | string | `"100Gi"` |  |
 | elasticsearch.replicas | int | `1` |  |
-| fluentd.image | string | `"fluent/fluentd-kubernetes-daemonset:v1.15-debian-elasticsearch7-1"` |  |
-| kibana.image | string | `"docker.elastic.co/kibana/kibana:7.5.0"` |  |
+| elasticsearch.resources.limits.cpu | string | `"1000m"` |  |
+| elasticsearch.resources.limits.memory | string | `"2Gi"` |  |
+| elasticsearch.resources.requests.cpu | string | `"1000m"` |  |
+| elasticsearch.resources.requests.memory | string | `"2Gi"` |  |
+| elasticsearch.sysctlVmMaxMapCount | string | `"262144"` |  |
+| filebeat.config."filebeat.yml" | string | `"filebeat.inputs:\n- type: container\n  paths:\n    - /var/log/containers/*.log\n  exclude_files:\n    - /var/log/containers/fluent.*\n    - /var/log/containers/es-cluster-.*\n    - /var/log/containers/kube-proxy.*\n    - /var/log/containers/konnectivity-agent.*\n    - /var/log/containers/efs-csi-node-.*\n    - /var/log/containers/ebs-snapshot-controller-.*\n    - /var/log/containers/gke-.*\n    - /var/log/containers/event-exporter-gke-.*\n    - /var/log/containers/calico-.*\n    - /var/log/containers/kube-dns-.*\n    - /var/log/containers/netd-.*\n    - /var/log/containers/pdcsi-node-.*\n    - /var/log/containers/csi-azuredisk-node-.*\n    - /var/log/containers/cloud-node-manager-.*\noutput.elasticsearch:\n  protocol: https\n  hosts: ['${ELASTICSEARCH_HOST:logs-elasticsearch}:${ELASTICSEARCH_PORT:9200}']\n  username: \"${ELASTICSEARCH_USERNAME:elastic}\"\n  password: \"${ELASTICSEARCH_PASSWORD}\"\n  ssl:\n    verification_mode: none\n    certificate_authorities:\n    - /usr/share/filebeat/config/certs/ca.crt\n    - /usr/share/filebeat/config/certs/tls.crt\n"` |  |
+| filebeat.enabled | bool | `true` |  |
+| filebeat.image | string | `"docker.elastic.co/beats/filebeat:7.17.14"` |  |
+| filebeat.updateStrategy | string | `"RollingUpdate"` |  |
+| fluentd.enabled | bool | `false` |  |
+| fluentd.image | string | `"fluent/fluentd-kubernetes-daemonset:v1.16-debian-elasticsearch7-1"` |  |
+| kibana.image | string | `"docker.elastic.co/kibana/kibana:7.17.14"` |  |
 | kibana.ingress.annotations | object | `{}` |  |
 | kibana.ingress.host | string | `"kibana.example.com"` |  |
 | kibana.ingress.ingressClassName | string | `"nginx"` |  |
