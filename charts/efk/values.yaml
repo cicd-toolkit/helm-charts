@@ -68,9 +68,6 @@ filebeat:
           - /usr/share/filebeat/config/certs/ca.crt
           - /usr/share/filebeat/config/certs/tls.crt
 
-
-
-
 curator:
   schedule: "0 1 * * *"
   image: "public.ecr.aws/bitnami/elasticsearch-curator:5.8.4-debian-11-r11"
