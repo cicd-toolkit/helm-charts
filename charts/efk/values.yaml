@@ -17,7 +17,7 @@ elasticsearch:
 
 kibana:
   replicas: 1
-  image: docker.elastic.co/kibana/kibana:7.17.14
+  image: docker.elastic.co/kibana/kibana:7.17.25
   password: elastic
   init_index_pattern: false
   ingress:
