@@ -32,11 +32,10 @@ jobs:
       - name: Prepare GPG key #this step is for using exported keys and make your github runner
         id: gpg
         run: |
-          gpg_dir=.gnupg
-          mkdir "$gpg_dir"
-          keyring="$gpg_dir/secring.gpg" #referring keyring to private key of gpg
+          mkdir "$KEY_PATH"
+          keyring="$KEY_PATH/secring.gpg" #referring keyring to private key of gpg
           base64 -d <<< "$GPG_KEYRING_BASE64" > "$keyring" #storing base64 GPG key into keyring
-          passphrase_file="$gpg_dir/passphrase"
+          passphrase_file="$KEY_PATH/passphrase"
           echo "$GPG_PASSPHRASE" > "$passphrase_file" #storing passphrase data into a file
           gpg --passphrase "$GPG_PASSPHRASE" --import $keyring
           KEY_ID=$(gpg --list-secret-keys --with-colons | grep '^sec' | cut -d':' -f5)
@@ -51,6 +50,7 @@ jobs:
         env:
           GPG_KEYRING_BASE64: "${{ secrets.GPG_KEYRING_BASE64 }}" #Referring secrets of github above
           GPG_PASSPHRASE: "${{ secrets.GPG_PASSPHRASE }}"
+          KEY_PATH: ".gpg-dir"
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
