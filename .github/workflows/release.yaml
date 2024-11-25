@@ -30,6 +30,7 @@ jobs:
 
 
       - name: Prepare GPG key #this step is for using exported keys and make your github runner
+        id: gpg
         run: |
           gpg_dir=.gnupg
           mkdir "$gpg_dir"
@@ -40,7 +41,7 @@ jobs:
           gpg --passphrase "$GPG_PASSPHRASE" --import $keyring
           KEY_ID=$(gpg --list-secret-keys --with-colons | grep '^sec' | cut -d':' -f5)
           echo "key id: $KEY_ID"
-          echo "CR_KEY=$KEY_ID" >> "$GITHUB_ENV" #saving CR_KEY into github-environment
+          echo "CR_KEY=$KEY_ID" >> "$GITHUB_OUTPUT"
           echo "CR_PASSPHRASE_FILE=$passphrase_file" >> "$GITHUB_ENV" #saving passphrase into github-environment
           echo "CR_KEYRING=$keyring" >> "$GITHUB_ENV" #saving private key into github-environemnt
         env:
@@ -51,4 +52,5 @@ jobs:
         uses: helm/chart-releaser-action@v1.6.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_KEY: "${{ steps.gpg.outputs.CR_KEY }}"
           CR_SIGN: true # set to true to sign images
