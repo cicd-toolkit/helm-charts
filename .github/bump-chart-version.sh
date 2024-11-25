@@ -37,5 +37,3 @@ fi
 
 echo "Bumping version for $parent_dir from $version to $major.$minor.$patch"
 sed -i "s/^version:.*/version: ${major}.${minor}.${patch}/g" "charts/${parent_dir}/Chart.yaml"
-
-helm-docs --log-level warning --template-files ../ci/README.md.gotmpl "charts/${parent_dir}"
