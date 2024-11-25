@@ -32,6 +32,7 @@ jobs:
       - name: Prepare GPG key #this step is for using exported keys and make your github runner
         id: gpg
         run: |
+          export GPG_TTY=$(tty)
           mkdir "$KEY_PATH"
           keyring="$KEY_PATH/secring.gpg" #referring keyring to private key of gpg
           base64 -d <<< "$GPG_KEYRING_BASE64" > "$keyring" #storing base64 GPG key into keyring
