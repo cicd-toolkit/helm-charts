@@ -2,7 +2,7 @@
     "bumpVersion": "patch",
     "dependencyDashboard": true,
     "ignorePaths": [
-      "archives/**"
+        "archives/**"
     ],
     "prConcurrentLimit": 0,
     "prHourlyLimit": 0,
@@ -10,107 +10,116 @@
     "semanticCommitScope": null,
     "semanticCommitType": "fix",
     "packageRules": [
-      {
-        "matchManagers": [
-          "helm-values"
-        ]
-      },
-      {
-        "matchPaths": [
-          ".github/workflows/**"
-        ],
-        "semanticCommitType": "ci"
-      },
-      {
-        "matchDepNames": [
-          "helm",
-          "kindest/node"
-        ],
-        "separateMinorPatch": true
-      },
-      {
-        "matchDepNames": [
-          "helm",
-          "kindest/node"
-        ],
-        "matchUpdateTypes": [
-          "major",
-          "minor"
-        ],
-        "enabled": false
-      },
-      {
-        "matchPaths": [
-          "charts/*/Chart.yaml",
-          "charts/*/values.yaml"
-        ],
-        "matchUpdateTypes": [
-          "major"
-        ],
-        "bumpVersion": "major",
-        "semanticCommitType": "feat!"
-      },
-      {
-        "matchPaths": [
-          "charts/*/Chart.yaml",
-          "charts/*/values.yaml"
-        ],
-        "matchUpdateTypes": [
-          "minor"
-        ],
-        "bumpVersion": "minor",
-        "semanticCommitType": "feat"
-      },
-      {
-        "matchUpdateTypes": [
-          "patch"
-        ],
-        "automerge": true
-      }
+        {
+            "matchManagers": [
+                "helm-values"
+            ],
+            "postUpgradeTasks": {
+                "commands": [
+                    "bash .github/bump-chart-version.sh '{{{parentDir}}}' '{{{isMajor}}}' '{{{isMinor}}}' '{{{isPatch}}}'"
+                ],
+                "fileFilters": [
+                    "charts/*/Chart.yaml"
+                ],
+                "executionMode": "branch"
+            }
+        },
+        {
+            "matchPaths": [
+                ".github/workflows/**"
+            ],
+            "semanticCommitType": "ci"
+        },
+        {
+            "matchDepNames": [
+                "helm",
+                "kindest/node"
+            ],
+            "separateMinorPatch": true
+        },
+        {
+            "matchDepNames": [
+                "helm",
+                "kindest/node"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor"
+            ],
+            "enabled": false
+        },
+        {
+            "matchPaths": [
+                "charts/*/Chart.yaml",
+                "charts/*/values.yaml"
+            ],
+            "matchUpdateTypes": [
+                "major"
+            ],
+            "bumpVersion": "major",
+            "semanticCommitType": "feat!"
+        },
+        {
+            "matchPaths": [
+                "charts/*/Chart.yaml",
+                "charts/*/values.yaml"
+            ],
+            "matchUpdateTypes": [
+                "minor"
+            ],
+            "bumpVersion": "minor",
+            "semanticCommitType": "feat"
+        },
+        {
+            "matchUpdateTypes": [
+                "patch"
+            ],
+            "automerge": true
+        }
     ],
     "regexManagers": [
-      {
-        "fileMatch": [
-          "^\\.github\\/workflows\\/.*$"
-        ],
-        "matchStrings": [
-          "(:|-) (?<currentValue>.+?) # renovate: helm\\n"
-        ],
-        "datasourceTemplate": "github-releases",
-        "depNameTemplate": "helm",
-        "packageNameTemplate": "helm/helm"
-      },
-      {
-        "fileMatch": [
-          "^\\.github\\/workflows\\/.*$"
-        ],
-        "matchStrings": [
-          "(:|-) (?<currentValue>.+?) # renovate: kindest\\/node\\n"
-        ],
-        "datasourceTemplate": "docker",
-        "depNameTemplate": "kindest/node"
-      },
-      {
-        "fileMatch": [
-          "^\\.github\\/workflows\\/.*$"
-        ],
-        "matchStrings": [
-          "(:|-) (?<currentValue>.+?) # renovate: python\\n"
-        ],
-        "datasourceTemplate": "github-releases",
-        "depNameTemplate": "python",
-        "extractVersionTemplate": "^(?<version>.+)-\\d+$",
-        "packageNameTemplate": "actions/python-versions"
-      },
-      {
-        "fileMatch": [
-          "^\\.github\\/workflows\\/.*$"
-        ],
-        "matchStrings": [
-          "(:|-) (?<currentValue>.+?) # renovate: ghcr.io\\/renovatebot\\/renovate\\n"
-        ],
-        "datasourceTemplate": "docker",
-        "depNameTemplate": "ghcr.io/renovatebot/renovate"
-      }
+        {
+            "fileMatch": [
+                "^\\.github\\/workflows\\/.*$"
+            ],
+            "matchStrings": [
+                "(:|-) (?<currentValue>.+?) # renovate: helm\\n"
+            ],
+            "datasourceTemplate": "github-releases",
+            "depNameTemplate": "helm",
+            "packageNameTemplate": "helm/helm"
+        },
+        {
+            "fileMatch": [
+                "^\\.github\\/workflows\\/.*$"
+            ],
+            "matchStrings": [
+                "(:|-) (?<currentValue>.+?) # renovate: kindest\\/node\\n"
+            ],
+            "datasourceTemplate": "docker",
+            "depNameTemplate": "kindest/node"
+        },
+        {
+            "fileMatch": [
+                "^\\.github\\/workflows\\/.*$"
+            ],
+            "matchStrings": [
+                "(:|-) (?<currentValue>.+?) # renovate: python\\n"
+            ],
+            "datasourceTemplate": "github-releases",
+            "depNameTemplate": "python",
+            "extractVersionTemplate": "^(?<version>.+)-\\d+$",
+            "packageNameTemplate": "actions/python-versions"
+        },
+        {
+            "fileMatch": [
+                "^\\.github\\/workflows\\/.*$"
+            ],
+            "matchStrings": [
+                "(:|-) (?<currentValue>.+?) # renovate: ghcr.io\\/renovatebot\\/renovate\\n"
+            ],
+            "datasourceTemplate": "docker",
+            "depNameTemplate": "ghcr.io/renovatebot/renovate"
+        }
     ]
-  }
+}
