@@ -1,6 +1,6 @@
 # efk
 
-![Version: 0.0.23](https://img.shields.io/badge/Version-0.0.23-informational?style=flat-square)
+![Version: 0.0.24](https://img.shields.io/badge/Version-0.0.24-informational?style=flat-square)
 
 ## How to install this chart
 
@@ -56,7 +56,7 @@ helm install my-release cicd-toolkit/efk -f values.yaml
 | elasticsearch.sysctlVmMaxMapCount | string | `"262144"` |  |
 | filebeat.config."filebeat.yml" | string | `"filebeat.inputs:\n- type: container\n  paths:\n    - /var/log/containers/*.log\n  exclude_files:\n    - /var/log/containers/fluent.*\n    - /var/log/containers/es-cluster-.*\n    - /var/log/containers/kube-proxy.*\n    - /var/log/containers/konnectivity-agent.*\n    - /var/log/containers/efs-csi-node-.*\n    - /var/log/containers/ebs-snapshot-controller-.*\n    - /var/log/containers/gke-.*\n    - /var/log/containers/event-exporter-gke-.*\n    - /var/log/containers/calico-.*\n    - /var/log/containers/kube-dns-.*\n    - /var/log/containers/netd-.*\n    - /var/log/containers/pdcsi-node-.*\n    - /var/log/containers/csi-azuredisk-node-.*\n    - /var/log/containers/cloud-node-manager-.*\n  processors:\n  - add_kubernetes_metadata:\n      host: ${NODE_NAME}\n      matchers:\n      - logs_path:\n          logs_path: \"/var/log/containers/\"\noutput.elasticsearch:\n  protocol: https\n  hosts: ['${ELASTICSEARCH_HOST:logs-elasticsearch}:${ELASTICSEARCH_PORT:9200}']\n  username: \"${ELASTICSEARCH_USERNAME:elastic}\"\n  password: \"${ELASTICSEARCH_PASSWORD}\"\n  ssl:\n    verification_mode: none\n    certificate_authorities:\n    - /usr/share/filebeat/config/certs/ca.crt\n    - /usr/share/filebeat/config/certs/tls.crt\n"` |  |
 | filebeat.enabled | bool | `true` |  |
-| filebeat.image | string | `"docker.elastic.co/beats/filebeat:7.17.14"` |  |
+| filebeat.image | string | `"docker.elastic.co/beats/filebeat:7.17.25"` |  |
 | filebeat.updateStrategy | string | `"RollingUpdate"` |  |
 | fluentd.enabled | bool | `false` |  |
 | fluentd.image | string | `"fluent/fluentd-kubernetes-daemonset:v1.16-debian-elasticsearch7-1"` |  |
