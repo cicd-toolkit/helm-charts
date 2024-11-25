@@ -5,9 +5,9 @@ Here we have collected a few charts that I use
 ## TLDR
 
 ```console
-helm repo add giuliocalzolari https://github.com/giuliocalzolari/helm-charts
-helm search repo giuliocalzolari
-helm install my-release giuliocalzolari/<chart>
+helm repo add cicd-toolkit https://github.com/cicd-toolkit/helm-charts
+helm search repo cicd-toolkit
+helm install my-release cicd-toolkit/<chart>
 ```
 
 ## Contributing

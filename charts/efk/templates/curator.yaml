@@ -4,9 +4,7 @@ metadata:
   name: {{ .Release.Name }}-curator-config
   labels:
     app.kubernetes.io/name: curator
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/version: {{ .Chart.Version }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- include "efk.labels" . | nindent 4 }}
 data:
   action_file.yml:   |-
     ---
@@ -56,25 +54,21 @@ kind: CronJob
 metadata:
   name: {{ .Release.Name }}-elasticsearch-curator
   labels:
-    app: elasticsearch-curator
-    release: {{ .Release.Name }}
     app.kubernetes.io/name: curator
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/version: {{ .Chart.Version }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- include "efk.labels" . | nindent 4 }}
 spec:
   schedule: {{ .Values.curator.schedule }}
   jobTemplate:
     metadata:
       labels:
-        app: elasticsearch-curator
-        release: {{ .Release.Name }}
+        app.kubernetes.io/name: elasticsearch-curator
+        app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       template:
         metadata:
           labels:
-            app: elasticsearch-curator
-            release: {{ .Release.Name }}
+            app.kubernetes.io/name: elasticsearch-curator
+            app.kubernetes.io/instance: {{ .Release.Name }}
         spec:
           volumes:
             - name: config-volume

@@ -9,9 +9,7 @@ metadata:
   name: elasticsearch-tls
   labels:
     app.kubernetes.io/name: elasticsearch
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/version: {{ .Chart.Version }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- include "efk.labels" . | nindent 4 }}
 data:
   tls.crt: {{ $cert.Cert | toString | b64enc }}
   tls.key: {{ $cert.Key | toString | b64enc }}

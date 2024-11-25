@@ -1,30 +1,26 @@
+{{- if .Values.fluentd.enabled }}
 ---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: fluentd
   labels:
-    app: fluentd
     app.kubernetes.io/name: fluentd
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/version: {{ .Chart.Version }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- include "efk.labels" . | nindent 4 }}
     kubernetes.io/cluster-service: "true"
 spec:
   selector:
     matchLabels:
-      app: fluentd
+      app.kubernetes.io/name: fluentd
+      app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: fluentd
         app.kubernetes.io/name: fluentd
-        app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/version: {{ .Chart.Version }}
-        app.kubernetes.io/managed-by: {{ .Release.Service }}
+        {{- include "efk.labels" . | nindent 8 }}
     spec:
-      serviceAccount: fluentd
-      serviceAccountName: fluentd
+      serviceAccount: logreader
+      serviceAccountName: logreader
       containers:
       - name: fluentd
         image: {{ .Values.fluentd.image }}
@@ -52,6 +48,7 @@ spec:
             value: >
               [
               "/var/log/containers/fluent*",
+              "/var/log/containers/es-cluster-*",
               "/var/log/containers/kube-proxy*",
               "/var/log/containers/konnectivity-agent*",
               "/var/log/containers/efs-csi-node-*",
@@ -67,7 +64,7 @@ spec:
               "/var/log/containers/cloud-node-manager-*",
               "/var/log/kube-proxy.log"
               ]
-            
+
           - name: FLUENT_CONTAINER_TAIL_PARSER_TYPE
             value: /^(?<time>.+) (?<stream>stdout|stderr)( (?<logtag>.))? (?<log>.*)$/
         resources:
@@ -106,9 +103,7 @@ metadata:
   name: fluent-bit-config
   labels:
     app.kubernetes.io/name: fluentd
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/version: {{ .Chart.Version }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- include "efk.labels" . | nindent 4 }}
 data:
   # Configuration files: server, input, filters and output
   # ======================================================
@@ -131,7 +126,7 @@ data:
         Path              /var/log/containers/*.log
         Parser            docker
         DB                /var/log/flb_kube.db
-        Mem_Buf_Limit     5MB
+        Mem_Buf_Limit     512MB
         Skip_Long_Lines   On
         Refresh_Interval  10
   filter-kubernetes.conf: |
@@ -143,7 +138,7 @@ data:
         Kube_Token_File     /var/run/secrets/kubernetes.io/serviceaccount/token
         Kube_Tag_Prefix     kube.var.log.containers.*
         Merge_Log           On
-        Merge_Log_Key       log_processed
+        Merge_Log_Key       log
         K8S-Logging.Parser  On
         K8S-Logging.Exclude Off
   output-elasticsearch.conf: |
@@ -157,7 +152,7 @@ data:
         TLS             On
         Logstash_Format On
         Replace_Dots    On
-        Retry_Limit     False
+        Retry_Limit     5
   parsers.conf: |
     [PARSER]
         Name   apache
@@ -198,3 +193,4 @@ data:
         Regex       ^\<(?<pri>[0-9]+)\>(?<time>[^ ]* {1,2}[^ ]* [^ ]*) (?<host>[^ ]*) (?<ident>[a-zA-Z0-9_\/\.\-]*)(?:\[(?<pid>[0-9]+)\])?(?:[^\:]*\:)? *(?<message>.*)$
         Time_Key    time
         Time_Format %b %d %H:%M:%S
+{{- end  }}
