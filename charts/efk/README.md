@@ -1,6 +1,6 @@
 # efk
 
-![Version: 0.0.24](https://img.shields.io/badge/Version-0.0.24-informational?style=flat-square)
+![Version: 0.0.25](https://img.shields.io/badge/Version-0.0.25-informational?style=flat-square)
 
 ## How to install this chart
 
@@ -45,7 +45,7 @@ helm install my-release cicd-toolkit/efk -f values.yaml
 | curator.unit_count | int | `15` |  |
 | elasticsearch.clusterHealthCheckParams | string | `"wait_for_status=green&timeout=1s"` |  |
 | elasticsearch.es_java_opt | string | `"-Xmx1g -Xms1g"` |  |
-| elasticsearch.image | string | `"docker.elastic.co/elasticsearch/elasticsearch:7.17.14"` |  |
+| elasticsearch.image | string | `"docker.elastic.co/elasticsearch/elasticsearch:7.17.25"` |  |
 | elasticsearch.persistence.storageClassName | string | `nil` |  |
 | elasticsearch.persistence.storageSize | string | `"100Gi"` |  |
 | elasticsearch.replicas | int | `1` |  |
