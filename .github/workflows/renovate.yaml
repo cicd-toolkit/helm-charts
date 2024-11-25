@@ -11,6 +11,7 @@ on:
     - renovate.json
     - .github/workflows/renovate.yaml
 
+
 jobs:
   renovate:
     runs-on: ubuntu-latest
