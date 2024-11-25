@@ -28,7 +28,25 @@ jobs:
         with:
           version: v3.12.1  # renovate: helm
 
+
+      - name: Prepare GPG key #this step is for using exported keys and make your github runner
+        run: |
+          gpg_dir=.gnupg
+          mkdir "$gpg_dir"
+          keyring="$gpg_dir/secring.gpg" #referring keyring to private key of gpg
+          base64 -d <<< "$GPG_KEYRING_BASE64" > "$keyring" #storing base64 GPG key into keyring
+          passphrase_file="$gpg_dir/passphrase"
+          echo "$GPG_PASSPHRASE" > "$passphrase_file" #storing passphrase data into a file
+          echo "CR_PASSPHRASE_FILE=$passphrase_file" >> "$GITHUB_ENV" #saving passphrase into github-environment
+          echo "CR_KEYRING=$keyring" >> "$GITHUB_ENV" #saving private key into github-environemnt
+          gpg --list-keys
+        env:
+          GPG_KEYRING_BASE64: "${{ secrets.GPG_KEYRING_BASE64 }}" #Referring secrets of github above
+          GPG_PASSPHRASE: "${{ secrets.GPG_PASSPHRASE }}"
+
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.5.0
+        uses: helm/chart-releaser-action@v1.6.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          # CR_KEY: "${{ secrets.CR_KEY }}" #Key name used while creating key
+          # CR_SIGN: true # set to true to sign images
