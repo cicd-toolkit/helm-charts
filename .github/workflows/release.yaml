@@ -37,9 +37,10 @@ jobs:
           base64 -d <<< "$GPG_KEYRING_BASE64" > "$keyring" #storing base64 GPG key into keyring
           passphrase_file="$gpg_dir/passphrase"
           echo "$GPG_PASSPHRASE" > "$passphrase_file" #storing passphrase data into a file
+          gpg --passphrase "$GPG_PASSPHRASE" --import $keyring
+          gpg --list-secret-keys
           echo "CR_PASSPHRASE_FILE=$passphrase_file" >> "$GITHUB_ENV" #saving passphrase into github-environment
           echo "CR_KEYRING=$keyring" >> "$GITHUB_ENV" #saving private key into github-environemnt
-          gpg --list-keys
         env:
           GPG_KEYRING_BASE64: "${{ secrets.GPG_KEYRING_BASE64 }}" #Referring secrets of github above
           GPG_PASSPHRASE: "${{ secrets.GPG_PASSPHRASE }}"
