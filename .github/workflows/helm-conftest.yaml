@@ -5,10 +5,10 @@ jobs:
     name: Run conftest for all charts
     runs-on: ubuntu-latest
     container:
-      image: alpine/helm:latest
+      image: alpine/helm:latest@sha256:cef4d7f768061c323abe70c9b53a432760584536b8602271305471b069713ea1
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Install Dependencies
         run: apk add --no-cache curl tar
