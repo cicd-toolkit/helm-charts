@@ -16,7 +16,7 @@ jobs:
         with:
           version: v3.12.1  # renovate: helm
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
         with:
           python-version: '3.9' # renovate: python
           check-latest: true
