@@ -1,6 +1,6 @@
 elasticsearch:
   replicas: 1
-  image: docker.elastic.co/elasticsearch/elasticsearch:7.17.25
+  image: docker.elastic.co/elasticsearch/elasticsearch:7.17.25@sha256:aaf1c65bc2d0d400d59ec70f0a137a5b4f3fb9c764319120ea3ca5a1e1e7869a
   es_java_opt: -Xmx1g -Xms1g
   sysctlVmMaxMapCount: "262144"
   clusterHealthCheckParams: "wait_for_status=green&timeout=1s"
@@ -17,7 +17,7 @@ elasticsearch:
 
 kibana:
   replicas: 1
-  image: docker.elastic.co/kibana/kibana:7.17.25
+  image: docker.elastic.co/kibana/kibana:7.17.25@sha256:f526876eb801eda6b6a31bf7997f76e43206fa4b08c4153f5d491fcb1dd81455
   password: elastic
   init_index_pattern: false
   ingress:
@@ -29,11 +29,11 @@ kibana:
       issuer: letsencrypt-prod
 
 fluentd:
-  image: fluent/fluentd-kubernetes-daemonset:v1.17-debian-elasticsearch7-1
+  image: fluent/fluentd-kubernetes-daemonset:v1.17-debian-elasticsearch7-1@sha256:b2676f28f64fa83d1aa1474210ac7f7b4e5248b28021c13b1274a0628742c6bd
   enabled: false
 
 filebeat:
-  image: docker.elastic.co/beats/filebeat:7.17.25
+  image: docker.elastic.co/beats/filebeat:7.17.25@sha256:9bf508a43265d503b131f7cdc95038c0606c2ee6ebe805dfae274e98da4b2f7d
   enabled: true
   updateStrategy: RollingUpdate
   config:
@@ -76,7 +76,7 @@ filebeat:
 
 curator:
   schedule: "0 1 * * *"
-  image: "public.ecr.aws/bitnami/elasticsearch-curator:5.8.4-debian-11-r11"
+  image: "public.ecr.aws/bitnami/elasticsearch-curator:5.8.4-debian-11-r11@sha256:46c98206dfaef81705d9397bd3d962d1505c8cfe9437f86ea0258d5cbef89e7f"
   unit_count: 15
   unit: days
   timestring: '%Y.%m.%d'
