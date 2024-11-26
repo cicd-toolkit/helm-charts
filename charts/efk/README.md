@@ -1,6 +1,6 @@
 # efk
 
-![Version: 0.0.26](https://img.shields.io/badge/Version-0.0.26-informational?style=flat-square)
+![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square)
 
 ## How to install this chart
 
@@ -59,7 +59,7 @@ helm install my-release cicd-toolkit/efk -f values.yaml
 | filebeat.image | string | `"docker.elastic.co/beats/filebeat:7.17.25"` |  |
 | filebeat.updateStrategy | string | `"RollingUpdate"` |  |
 | fluentd.enabled | bool | `false` |  |
-| fluentd.image | string | `"fluent/fluentd-kubernetes-daemonset:v1.16-debian-elasticsearch7-1"` |  |
+| fluentd.image | string | `"fluent/fluentd-kubernetes-daemonset:v1.17-debian-elasticsearch7-1"` |  |
 | kibana.image | string | `"docker.elastic.co/kibana/kibana:7.17.25"` |  |
 | kibana.ingress.annotations | object | `{}` |  |
 | kibana.ingress.host | string | `"kibana.example.com"` |  |
