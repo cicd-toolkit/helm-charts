@@ -21,6 +21,15 @@ entries:
     version: 0.0.2
   efk:
   - apiVersion: v2
+    created: "2024-11-26T08:20:17.973118693Z"
+    digest: b9e97e94fac0ae0cf319b4d7f5bb2818ed5142a4732527a19c90d4f3b28038be
+    maintainers:
+    - name: giuliocalzolari
+    name: efk
+    urls:
+    - https://github.com/cicd-toolkit/helm-charts/releases/download/efk-0.1.0/efk-0.1.0.tgz
+    version: 0.1.0
+  - apiVersion: v2
     created: "2024-11-26T08:13:20.628274488Z"
     digest: a457ca11e2137dccf91f9536381188b7cdd3d83fbf4e66cc262e093d4ea24365
     maintainers:
@@ -131,4 +140,4 @@ entries:
     urls:
     - https://github.com/cicd-toolkit/helm-charts/releases/download/kube-downscaler-0.7.4/kube-downscaler-0.7.4.tgz
     version: 0.7.4
-generated: "2024-11-26T08:13:20.628348366Z"
+generated: "2024-11-26T08:20:17.973169097Z"
