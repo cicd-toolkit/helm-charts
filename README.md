@@ -5,7 +5,7 @@ Here we have collected a few charts that I use
 ## TLDR
 
 ```console
-helm repo add cicd-toolkit https://github.com/cicd-toolkit/helm-charts
+helm repo add cicd-toolkit https://cicd-toolkit.github.io/helm-charts/
 helm search repo cicd-toolkit
 helm install my-release cicd-toolkit/<chart>
 ```
