@@ -38,7 +38,7 @@ helm install my-release cicd-toolkit/efk -f values.yaml
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| curator.image | string | `"public.ecr.aws/bitnami/elasticsearch-curator:5.8.4-debian-11-r11"` |  |
+| curator.image | string | `"public.ecr.aws/bitnami/elasticsearch-curator:5.8.4-debian-11-r11@sha256:46c98206dfaef81705d9397bd3d962d1505c8cfe9437f86ea0258d5cbef89e7f"` |  |
 | curator.schedule | string | `"0 1 * * *"` |  |
 | curator.timestring | string | `"%Y.%m.%d"` |  |
 | curator.unit | string | `"days"` |  |
@@ -59,7 +59,7 @@ helm install my-release cicd-toolkit/efk -f values.yaml
 | filebeat.image | string | `"docker.elastic.co/beats/filebeat:7.17.26@sha256:16bdd7222184b0f1945386b7325ac058ce6e933047cd99c85e2bd393a403f4a9"` |  |
 | filebeat.updateStrategy | string | `"RollingUpdate"` |  |
 | fluentd.enabled | bool | `false` |  |
-| fluentd.image | string | `"fluent/fluentd-kubernetes-daemonset:v1.17-debian-elasticsearch7-1"` |  |
+| fluentd.image | string | `"fluent/fluentd-kubernetes-daemonset:v1.17-debian-elasticsearch7-1@sha256:b2676f28f64fa83d1aa1474210ac7f7b4e5248b28021c13b1274a0628742c6bd"` |  |
 | kibana.image | string | `"docker.elastic.co/kibana/kibana:7.17.26@sha256:ff1fe238c68c1c8a30dd924b5d1556af14d53caa9e35e8dc1d8544bdf34881ee"` |  |
 | kibana.ingress.annotations | object | `{}` |  |
 | kibana.ingress.host | string | `"kibana.example.com"` |  |

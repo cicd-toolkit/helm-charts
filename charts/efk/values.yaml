@@ -29,7 +29,7 @@ kibana:
       issuer: letsencrypt-prod
 
 fluentd:
-  image: fluent/fluentd-kubernetes-daemonset:v1.17-debian-elasticsearch7-1
+  image: fluent/fluentd-kubernetes-daemonset:v1.17-debian-elasticsearch7-1@sha256:b2676f28f64fa83d1aa1474210ac7f7b4e5248b28021c13b1274a0628742c6bd
   enabled: false
 
 filebeat:
@@ -76,7 +76,7 @@ filebeat:
 
 curator:
   schedule: "0 1 * * *"
-  image: "public.ecr.aws/bitnami/elasticsearch-curator:5.8.4-debian-11-r11"
+  image: "public.ecr.aws/bitnami/elasticsearch-curator:5.8.4-debian-11-r11@sha256:46c98206dfaef81705d9397bd3d962d1505c8cfe9437f86ea0258d5cbef89e7f"
   unit_count: 15
   unit: days
   timestring: '%Y.%m.%d'
