@@ -29,7 +29,7 @@ kibana:
       issuer: letsencrypt-prod
 
 fluentd:
-  image: fluent/fluentd-kubernetes-daemonset:v1.17-debian-elasticsearch7-1@sha256:b2676f28f64fa83d1aa1474210ac7f7b4e5248b28021c13b1274a0628742c6bd
+  image: fluent/fluentd-kubernetes-daemonset:v1.18-debian-elasticsearch7-1@sha256:3990f1579ac3f40ab8514e3643fe0b30a1df2947d6e486047bb1926add0ee20d
   enabled: false
 
 filebeat:
