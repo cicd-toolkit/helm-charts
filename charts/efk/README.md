@@ -45,7 +45,7 @@ helm install my-release cicd-toolkit/efk -f values.yaml
 | curator.unit_count | int | `15` |  |
 | elasticsearch.clusterHealthCheckParams | string | `"wait_for_status=green&timeout=1s"` |  |
 | elasticsearch.es_java_opt | string | `"-Xmx1g -Xms1g"` |  |
-| elasticsearch.image | string | `"docker.elastic.co/elasticsearch/elasticsearch:7.17.26@sha256:1685e7e91b123a825a3b01cf577b0f7836e062e9cb24a1b5e76be76dd29127ea"` |  |
+| elasticsearch.image | string | `"docker.elastic.co/elasticsearch/elasticsearch:7.17.27@sha256:e3db87aef5d115408b36e3d5bbd309629100597462910d6b5efec70fcfead22a"` |  |
 | elasticsearch.persistence.storageClassName | string | `nil` |  |
 | elasticsearch.persistence.storageSize | string | `"100Gi"` |  |
 | elasticsearch.replicas | int | `1` |  |
