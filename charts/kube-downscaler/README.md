@@ -67,7 +67,7 @@ helm install my-release cicd-toolkit/kube-downscaler -f values.yaml
 | rbac.serviceAccountName | string | `"default"` |  |
 | replicaCount | int | `1` |  |
 | resetAnnotationsCronjob.enabled | bool | `false` |  |
-| resetAnnotationsCronjob.image | string | `"bitnami/kubectl:latest@sha256:3e89d1d1dbd10b1809bde3436bbe9f3708ad4c7d3ad4a9551cd8a16d88400365"` |  |
+| resetAnnotationsCronjob.image | string | `"bitnami/kubectl:latest@sha256:c1ad8e399fa68095782dcabfb43720fd419ba8095e061e381f35ae1693af9298"` |  |
 | resetAnnotationsCronjob.labelSelectors[0] | string | `"environment=staging"` |  |
 | resetAnnotationsCronjob.resources.limits.cpu | string | `"50m"` |  |
 | resetAnnotationsCronjob.resources.limits.memory | string | `"50Mi"` |  |
