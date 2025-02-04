@@ -17,7 +17,8 @@
             "matchFileNames": [
                 ".github/workflows/**"
             ],
-            "semanticCommitType": "ci"
+            "semanticCommitType": "ci",
+            "automerge": true
         },
         {
             "matchDepNames": [
@@ -57,7 +58,8 @@
                 "minor"
             ],
             "bumpVersion": "minor",
-            "semanticCommitType": "feat"
+            "semanticCommitType": "feat",
+            "automerge": true
         },
         {
             "matchUpdateTypes": [
