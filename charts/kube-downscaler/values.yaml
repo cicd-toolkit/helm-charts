@@ -68,7 +68,7 @@ deployment:
 # Sometimes people forget to remove the annotations and this can incur costs
 resetAnnotationsCronjob:
   enabled: false
-  image: bitnami/kubectl:latest@sha256:96a29566b696a8cb64023b642b4cbdfe33b09da9ffe934b25e3acb04cd43a231
+  image: bitnami/kubectl:latest@sha256:7cf387225938570b66edeca167a11a24c24351e3bc559518a731cb57136cfebb
   # Cron schedule for when to reset the annotations
   schedule: 0 7 * * *
   # A kubectl selector to identify what deployments to remove the annotation from
