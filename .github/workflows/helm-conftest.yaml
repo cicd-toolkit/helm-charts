@@ -5,7 +5,7 @@ jobs:
     name: Run conftest for all charts
     runs-on: ubuntu-latest
     container:
-      image: alpine/helm:latest@sha256:f27b82cfca2e7575d0529a1235694fa1411f1836cc417ec05f1ebce7c809bed4
+      image: alpine/helm:latest@sha256:debd96b26afaa47858dc52aa443e879e277a3e8092d1d4f4707fa1ef92d5a7f0
     steps:
       - name: Checkout Code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
