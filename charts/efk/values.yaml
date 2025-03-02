@@ -33,7 +33,7 @@ fluentd:
   enabled: false
 
 filebeat:
-  image: docker.elastic.co/beats/filebeat:7.17.27@sha256:8e3140987216726625584e93efec38325451d0cefcf488b1c3763fcd5a5bcfc6
+  image: docker.elastic.co/beats/filebeat:7.17.28@sha256:a3bf5b2e3b1de412b28e2897ecbd07aa3070f8204048ac89e107c6593eac031c
   enabled: true
   updateStrategy: RollingUpdate
   config:
