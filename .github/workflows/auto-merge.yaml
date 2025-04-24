@@ -1,0 +1,78 @@
+name: auto-merge
+# https://medium.com/@humu71918/automatically-approving-and-merging-dependabot-pull-requests-with-github-actions-518193ddb1c9
+on:
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+  actions: read
+  statuses: read
+
+jobs:
+  auto-approve:
+    runs-on: ubuntu-latest
+    if: contains(github.head_ref == ' renovate/')
+    env:
+      PR_URL: ${{github.event.pull_request.html_url}}
+      GH_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+
+    - name: Wait 5 minutes for other checks to complete
+      run: sleep 60
+
+    - name: Check if all workflows have passed
+      run: |
+          MAX_RETRIES=10
+          RETRY_INTERVAL=60  # Specify 1 minutes in seconds
+          ATTEMPT=0
+          CURRENT_WORKFLOW="auto-merge"
+
+          while [ $ATTEMPT -lt $MAX_RETRIES ]; do
+            echo "Fetching PR status checks..."
+            WORKFLOWS=$(gh pr view "$PR_URL" --json statusCheckRollup -q '.statusCheckRollup')
+
+            # Debug: Output the status of all checks
+            echo "Debug: Current status of all checks:"
+            WORKFLOW_STATUS=$(jq -r '[.[] | {name: (.workflowName // .name // .context), type: .["__typename"], status: .status, state: .state, conclusion: .conclusion}]' <<< "$WORKFLOWS")
+
+            # Check if all checks except the current workflow have succeeded
+            all_passed=true
+            while IFS= read -r check; do
+              name=$(jq -r '.name' <<< "$check")
+              type=$(jq -r '.type' <<< "$check")
+              status1=$(jq -r 'if .type == "CheckRun" then .conclusion else .state end' <<< "$check")
+              if [[ "$name" != "$CURRENT_WORKFLOW" && "$status1" != "SUCCESS" ]]; then
+                all_passed=false
+                echo "Failed check: $name ($type) - Status: $status1"
+                break
+              fi
+            done < <(echo "$WORKFLOW_STATUS" | jq -c '.[]')
+
+            if $all_passed; then
+              echo "All other checks have passed"
+              exit 0
+            else
+              echo "Some status checks have not passed. Attempt $((ATTEMPT + 1)) of $MAX_RETRIES."
+              echo "Retrying in $RETRY_INTERVAL seconds..."
+              sleep $RETRY_INTERVAL
+              ATTEMPT=$((ATTEMPT + 1))
+            fi
+          done
+          echo "Failed to merge the PR after $MAX_RETRIES attempts due to failing status checks."
+          exit 1
+
+    - name: Approve PR
+      run: gh pr review --approve --body "auto-approved-by-bot" "$PR_URL"
+
+    - name: Merge PR
+      run: gh pr merge --squash "$PR_URL"
