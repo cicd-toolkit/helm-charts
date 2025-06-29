@@ -60,7 +60,7 @@ helm install my-release cicd-toolkit/efk -f values.yaml
 | filebeat.updateStrategy | string | `"RollingUpdate"` |  |
 | fluentd.enabled | bool | `false` |  |
 | fluentd.image | string | `"fluent/fluentd-kubernetes-daemonset:v1.17-debian-elasticsearch7-1@sha256:b2676f28f64fa83d1aa1474210ac7f7b4e5248b28021c13b1274a0628742c6bd"` |  |
-| kibana.image | string | `"docker.elastic.co/kibana/kibana:7.17.27@sha256:9db2f6379e00a5d271bb915280075c980bfe50b71c8702612c766e77fbb9ca15"` |  |
+| kibana.image | string | `"docker.elastic.co/kibana/kibana:7.17.29@sha256:7260d867c2513154817d1709bdb17e8bc6bfe5e00c85e10556d2be0f71309bcf"` |  |
 | kibana.ingress.annotations | object | `{}` |  |
 | kibana.ingress.host | string | `"kibana.example.com"` |  |
 | kibana.ingress.ingressClassName | string | `"nginx"` |  |
