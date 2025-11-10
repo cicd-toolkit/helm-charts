@@ -132,7 +132,7 @@ spec:
             secretName: elasticsearch-tls
   volumeClaimTemplates:
   - apiVersion: v1	
-    kind: PersistentVolumeClaim
+    kind: PersistentVolumeClaimx
     metadata:
       name: data-logging
       labels:
