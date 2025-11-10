@@ -74,4 +74,4 @@ helm install my-release cicd-toolkit/efk -f values.yaml
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| giuliocalzolari |  |  |
+| giuliocalzo |  |  |
