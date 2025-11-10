@@ -2,4 +2,4 @@ apiVersion: v2
 name: efk
 version: 0.1.2
 maintainers:
-- name: giuliocalzolari
+- name: giuliocalzo
