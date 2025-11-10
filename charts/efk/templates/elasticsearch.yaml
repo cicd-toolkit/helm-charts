@@ -131,7 +131,9 @@ spec:
           secret:
             secretName: elasticsearch-tls
   volumeClaimTemplates:
-  - metadata:
+  - apiVersion: v1	
+    kind: PersistentVolumeClaim
+    metadata:
       name: data-logging
       labels:
         app.kubernetes.io/name: elasticsearch
